@@ -12,6 +12,7 @@ public class Calculator {
         String calcString; //= scanner.nextLine();
         System.out.println("Для завершения введите off");
         do {
+            Numbers first = null, second = null;
             calcString = scanner.nextLine();
             if (calcString.equals("") || calcString.equals("off")) break;
             String operand = null;
@@ -31,10 +32,12 @@ public class Calculator {
             }
 
             Pattern pattern = Pattern.compile("[IVX]+");
-            Numbers first = null, second = null;
-
             if (pattern.matcher(oper[0]).find()) {
                 first = new RomanNumbers(oper[0].trim());
+                if (first.value > 10) {
+                    System.out.println("Допустим вводи чисел от 1 до 10 включительно, не более");
+                    break;
+                }
             }
             if (pattern.matcher(oper[1]).find()) {
                 second = new RomanNumbers(oper[1].trim());
@@ -45,6 +48,11 @@ public class Calculator {
             if (!pattern.matcher(oper[1]).find()) {
                 second = new ArabicNumbers(oper[1].trim());
             }
+            if (first.value > 10 || second.value > 10) {
+                System.out.println("Допустим ввод чисел от 1 до 10 включительно, не более");
+                break;
+            }
+
             if ((first.getNumberType()==Numbers.numberType.ARABIC
                     && second.getNumberType()==Numbers.numberType.ARABIC)) {
                 System.out.println(Numbers.calc(first, second, operand));
