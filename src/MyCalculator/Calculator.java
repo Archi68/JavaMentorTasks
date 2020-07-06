@@ -34,10 +34,6 @@ public class Calculator {
             Pattern pattern = Pattern.compile("[IVX]+");
             if (pattern.matcher(oper[0]).find()) {
                 first = new RomanNumbers(oper[0].trim());
-                if (first.value > 10) {
-                    System.out.println("Допустим вводи чисел от 1 до 10 включительно, не более");
-                    break;
-                }
             }
             if (pattern.matcher(oper[1]).find()) {
                 second = new RomanNumbers(oper[1].trim());
